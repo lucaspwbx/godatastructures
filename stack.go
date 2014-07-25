@@ -21,8 +21,7 @@ func (s *Stack) length() int {
 }
 
 func NewStack() *Stack {
-  stack := &Stack{}
-  return stack
+  return &Stack{}
 }
 
 func (s *Stack) String() string {
@@ -36,12 +35,6 @@ func (s *Stack) String() string {
     }
   }
   return a
-}
-
-func (s *Stack) print() {
-  for _, v := range s.structure {
-    fmt.Println(v)
-  }
 }
 
 func main() {
