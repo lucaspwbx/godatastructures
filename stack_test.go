@@ -4,8 +4,8 @@ import "testing"
 
 func TestNewStack(t *testing.T) {
 	stack := NewStack()
-	if stack.structure != nil {
-		t.Errorf("Stack structure should be nil")
+	if stack.values != nil {
+		t.Errorf("Stack values should be nil")
 	}
 }
 
@@ -22,7 +22,7 @@ func TestStackPush(t *testing.T) {
 	if stack.length() != 1 {
 		t.Errorf("Stack should have length 1")
 	}
-	if stack.structure[0] != 1 {
+	if stack.values[0] != 1 {
 		t.Errorf("Stack item should be 1")
 	}
 }

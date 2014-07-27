@@ -3,21 +3,21 @@ package stack
 import "strconv"
 
 type Stack struct {
-	structure []interface{}
+	values []interface{}
 }
 
 func (s *Stack) push(value interface{}) {
-	s.structure = append(s.structure, value)
+	s.values = append(s.values, value)
 }
 
 func (s *Stack) pop() interface{} {
-	value := s.structure[s.length()-1]
-	s.structure = s.structure[:s.length()-1]
+	value := s.values[s.length()-1]
+	s.values = s.values[:s.length()-1]
 	return value
 }
 
 func (s *Stack) length() int {
-	return len(s.structure)
+	return len(s.values)
 }
 
 func NewStack() *Stack {
@@ -26,7 +26,7 @@ func NewStack() *Stack {
 
 func (s *Stack) String() string {
 	var a string
-	for _, v := range s.structure {
+	for _, v := range s.values {
 		if value, ok := v.(string); ok {
 			a += value + "\n"
 		}
