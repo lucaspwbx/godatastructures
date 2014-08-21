@@ -3,10 +3,22 @@ package list
 import "testing"
 
 func TestInsert(t *testing.T) {
+	var data = []struct {
+		item     interface{}
+		expected int
+	}{
+		{1, 1},
+		{"item", 1},
+		{1.29, 1},
+	}
+
 	l := NewList()
-	l.Insert(1)
-	if len(l.ds) != 1 {
-		t.Errorf("Error inserting number")
+	for _, v := range data {
+		l.Insert(v)
+		if len(l.ds) != v.expected {
+			t.Errorf("Error inserting %v", v)
+		}
+		l.Clear()
 	}
 }
 
@@ -23,7 +35,23 @@ func TestRemove(t *testing.T) {
 	l := NewList()
 	l.Insert(1)
 	l.Remove(1)
-	if len(l.ds) != 0 {
+	if l.Size() != 0 {
 		t.Errorf("Error removing element")
+	}
+}
+
+func TestClear(t *testing.T) {
+	l := NewList()
+	l.Insert(1)
+	l.Clear()
+	if l.Size() != 0 {
+		t.Errorf("Error clearing list")
+	}
+}
+
+func TestSize(t *testing.T) {
+	l := NewList()
+	if l.Size() != 0 {
+		t.Errorf("Error, size should be 0")
 	}
 }
