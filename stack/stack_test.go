@@ -2,39 +2,50 @@ package stack
 
 import "testing"
 
-func TestNewStack(t *testing.T) {
+func TestIsEmpty(t *testing.T) {
 	stack := NewStack()
-	if stack.values != nil {
-		t.Errorf("Stack values should be nil")
+	if stack.isEmpty() != true {
+		t.Errorf("Should be empty")
 	}
 }
 
-func TestStackLength(t *testing.T) {
+func TestPush(t *testing.T) {
 	stack := NewStack()
-	if stack.length() != 0 {
-		t.Errorf("Length should be 0")
+	stack.Push(1)
+	if stack.isEmpty() != false {
+		t.Errorf("Should have one item")
 	}
 }
 
-func TestStackPush(t *testing.T) {
+func TestPop(t *testing.T) {
 	stack := NewStack()
-	stack.push(1)
-	if stack.length() != 1 {
-		t.Errorf("Stack should have length 1")
+	stack.Push(1)
+	if item, _ := stack.Pop(); item != 1 {
+		t.Errorf("Item should be 1")
 	}
-	if stack.values[0] != 1 {
-		t.Errorf("Stack item should be 1")
+	if isEmpty := stack.isEmpty(); isEmpty != true {
+		t.Errorf("Stack should be empty")
+	}
+	if _, err := stack.Pop(); err == nil {
+		t.Errorf("should have returned error")
 	}
 }
 
-func TestStackPop(t *testing.T) {
+func TestPeek(t *testing.T) {
 	stack := NewStack()
-	stack.push(2)
-	teste := stack.pop()
-	if stack.length() != 0 {
-		t.Errorf("Stack should have length 0")
+	stack.Push(1)
+	if item := stack.Peek(); item != 1 {
+		t.Errorf("Peeked item should be 1")
 	}
-	if teste != 2 {
-		t.Errorf("Item popped should be 2")
+	if stack.isEmpty() != false {
+		t.Errorf("Stack must remain the same after peeking of item")
+	}
+}
+
+func TestSize(t *testing.T) {
+	stack := NewStack()
+	stack.Push(1)
+	if size := stack.Size(); size != 1 {
+		t.Errorf("Size shoud be 1")
 	}
 }

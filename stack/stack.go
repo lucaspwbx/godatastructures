@@ -1,38 +1,42 @@
 package stack
 
-import "strconv"
+import "errors"
 
 type Stack struct {
-	values []interface{}
+	dt []interface{}
 }
 
-func (s *Stack) push(value interface{}) {
-	s.values = append(s.values, value)
+func (s *Stack) isEmpty() bool {
+	if len(s.dt) == 0 {
+		return true
+	}
+	return false
 }
 
-func (s *Stack) pop() interface{} {
-	value := s.values[s.length()-1]
-	s.values = s.values[:s.length()-1]
-	return value
+func (s *Stack) Push(element interface{}) {
+	s.dt = append(s.dt, element)
 }
 
-func (s *Stack) length() int {
-	return len(s.values)
+func (s *Stack) Pop() (interface{}, error) {
+	if s.isEmpty() {
+		return nil, errors.New("stack is empty")
+	}
+	popped := s.dt[len(s.dt)-1]
+	s.dt = s.dt[:len(s.dt)-1]
+	return popped, nil
+}
+
+func (s *Stack) Peek() interface{} {
+	if s.isEmpty() {
+		return nil
+	}
+	return s.dt[len(s.dt)-1]
+}
+
+func (s *Stack) Size() int {
+	return len(s.dt)
 }
 
 func NewStack() *Stack {
 	return &Stack{}
-}
-
-func (s *Stack) String() string {
-	var a string
-	for _, v := range s.values {
-		if value, ok := v.(string); ok {
-			a += value + "\n"
-		}
-		if number, ok := v.(int); ok {
-			a += strconv.Itoa(number) + "\n"
-		}
-	}
-	return a
 }
