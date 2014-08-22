@@ -13,7 +13,13 @@ func (l *LinkedList) Find(item interface{}) *Node {
 	currNode := l.head
 	for {
 		if currNode.element != item {
+			if currNode.next == nil {
+				return nil
+				break
+			}
 			currNode = currNode.next
+		} else {
+			break
 		}
 	}
 	return currNode
@@ -31,6 +37,8 @@ func (l *LinkedList) FindPrevious(item interface{}) *Node {
 	for {
 		if currNode.next != nil && currNode.next.element != item {
 			currNode = currNode.next
+		} else {
+			break
 		}
 	}
 	return currNode
