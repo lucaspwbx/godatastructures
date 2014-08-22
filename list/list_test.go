@@ -55,3 +55,30 @@ func TestSize(t *testing.T) {
 		t.Errorf("Error, size should be 0")
 	}
 }
+
+func TestContains(t *testing.T) {
+	l := NewList()
+	l.Insert(1)
+	if l.Contains(1) != true {
+		t.Errorf("Error, should contain 1")
+	}
+}
+
+func TestFront(t *testing.T) {
+	l := NewList()
+	l.Insert(1)
+	l.Front()
+	if l.CurrentPos() != 0 {
+		t.Errorf("Error, should be index 0")
+	}
+}
+
+func TestEnd(t *testing.T) {
+	l := NewList()
+	l.Insert(1)
+	l.Insert(2)
+	l.End()
+	if l.CurrentPos() != 1 {
+		t.Errorf("Error, should be index 1")
+	}
+}
